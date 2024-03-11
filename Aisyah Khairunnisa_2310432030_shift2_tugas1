@@ -1,0 +1,61 @@
+soal nomor 1
+
+#include <iostream>
+using namespace std;
+
+int main(){
+    float a,b,c,d,e,f,g,h,ip;
+    float sksa,sksb,sksc,sksd,skse,sksf,sksg,sksh,nilai,sks;
+    const string nama = "Aisyah Khairunnisa Ramadhani";
+    const string nim = "2310432030";
+    cout<<" Nama : "<<nama<<endl;
+    cout<<" No BP: "<<nim<<endl;
+    cout<<endl;
+    cout<<" Nilai Fisika Dasar = "; cin>>a;
+    cout<<" sks = "; cin>>sksa;
+    cout<<" Nilai Kimia Dasar = "; cin>>b;
+    cout<<" sks = "; cin>>sksb;
+    cout<<" Nilai Bahasa Inggris Matematika = "; cin>>c;
+    cout<<" sks = "; cin>>sksc;
+    cout<<" Nilai Pengantar Matematika = "; cin>>d;
+    cout<<" sks = "; cin>>sksd;
+    cout<<" Nilai Kalkulus 1 = "; cin>>e;
+    cout<<" sks = "; cin>>skse;
+    cout<<" Nilai Analisis Data = "; cin>>f;
+    cout<<" sks = "; cin>>sksf;
+    cout<<" Nilai Agama = "; cin>>g;
+    cout<<" sks = "; cin>>sksg;
+    cout<<" Nilai Bahasa Indonesia = "; cin>>h;
+    cout<<" sks = "; cin>>sksh;
+    sks= sksa+sksb+sksc+sksd+skse+sksf+sksg+sksh;
+    nilai=(a*sksa)+(b*sksb)+(c*sksc)+(d*sksd)+(e*skse)+(f*sksf)+(g*sksg)+(h*sksh);
+    ip= nilai/sks;
+    cout<<" jumlah sks yang diambil = "<<sks<<endl;
+    cout<<" jumlah nilai sks = "<<nilai<<endl;
+    cout<<" IP = "<<ip;
+    cout<<endl;
+}
+
+soal nomor 2
+
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main (){
+    float a, t, v, c, Lp;
+    const string nama = "Aisyah Khairunnisa Ramadhani";
+    const string nim  = "2310432030";
+    cout<<" Nama : "<<nama<<endl;
+    cout<<" No BP: "<<nim<<endl;
+    cout<<endl;
+    cout<<" panjang sisi alas limas = "; cin>>a;
+    cout<<" tinggi limas = "; cin>>t;
+    v=(((a*a)*t)/3);
+    c=sqrt((a/2)*(a/2)+(t*t));
+    Lp=((a*a)+4*(a*c)/2);
+    cout<<" Tinggi segitiga tegak = "<<c<<endl;
+    cout<<" Volume Limas Segi Empat Beraturan = "<<v<<endl;
+    cout<<" Luas Permukaan Limas Segi Empat Beraturan = "<<Lp;
+    cout<<endl;
+}
