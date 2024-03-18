@@ -1,0 +1,83 @@
+#include <iostream>
+using namespace std;
+
+int main (){
+    string medan, padang, aceh, palembang, jambi, lampung, tujuan, kelas, ekonomi, bisnis, first;
+    int tiket, harga_tambahan, harga;
+    float diskon, akhir, total;
+    cout<<" Haloo! nama saya Aisyah Khairunnisa Ramadhani dengan No BP 2310432030 "<<endl;
+    cout<<" ## program pembelian tiket bus ## "<<endl;
+    cout<<" ======================================================================"<<endl;
+    cout<<endl;
+    cout<< " Bus PT ANS lintas Sumatera "<<endl;
+    cout<< " tujuan "<<endl;
+    cout<< " 1. Medan     = Rp.200.000"<<endl;
+    cout<< " 2. Padang    = Rp.150.000"<<endl;
+    cout<< " 3. Aceh      = Rp.250.000"<<endl;
+    cout<< " 4. Palembang = Rp.175.000"<<endl;
+    cout<< " 5. Jambi     = Rp.100.000"<<endl;
+    cout<< " 6. Lampung   = Rp.275.000"<<endl;
+    cout<<endl;
+    cout<< " Tujuan yang dipilih : ";cin>>tujuan;
+    if(tujuan==medan){
+        harga=200000;
+        cout<<" Tujuan yang dipilih adalah Medan";
+    }else if(tujuan==padang){
+        harga=150000;
+        cout<<"Tujuan yang dipilih adalah Padang";
+    }else if(tujuan==aceh){
+        harga=250000;
+        cout<<"Tujuan yang dipilih adalah Aceh";
+    }else if(tujuan==palembang){
+        harga=175000;
+        cout<<"Tujuan yang dipilih adalah Palembang";
+    }else if(tujuan==jambi){
+        harga=100000;
+        cout<<"Tujuan yang dipilih adalah Jambi" ;
+    }else if(tujuan==lampung){
+        harga=275000;
+        cout<<"Tujuan yang dipilih adalah Lampung";
+    }else{
+        harga=0;
+    }
+    cout<<endl;
+    cout<<tujuan<<" dengan harga tiket = Rp."<<harga<<endl;
+    cout<<endl;
+    cout<< " Kelas (biaya tambahan)"<<endl;
+    cout<< " 1. Ekonomi Class   = Rp.10.000"<<endl;
+    cout<< " 2. Bisnis Class    = Rp.25.000"<<endl;
+    cout<< " 3. First Class     = Rp.30.000"<<endl;
+    cout<<endl;
+    cout<< " Kelas yang dipilih (cukup tuliskan kata awalnya saja) : "; cin>>kelas;
+    if(kelas==ekonomi){
+        harga_tambahan=10000;
+    }
+    else if(kelas==bisnis){
+        harga_tambahan=25000;
+    }
+    else if(kelas==first){
+        harga_tambahan=30000;
+    }
+    else{
+        harga_tambahan=0;
+    }
+    cout<< " Dengan tambahan biaya                                  :Rp."<<harga_tambahan<<endl;
+    cout<< " jumlah tiket                                           : "; cin>>tiket;
+    cout<<endl;
+    total= (harga + harga_tambahan)*tiket;
+    if ((tiket >=3)&&(tiket <=5)){
+        diskon= total*0.05;
+    }
+    else {
+        diskon= total*0.1;
+    }
+    akhir=total-diskon;
+    cout<<endl;
+    cout<< " Tujuan               : "<<tujuan<<endl;
+    cout<< " Kelas                : "<<kelas<<endl;
+    cout<< " Jumlah Tiket         : "<<tiket<<endl;
+    cout<< " Total                : Rp."<<total<<endl;
+    cout<< " Diskon               : Rp."<<diskon<<endl;
+    cout<< " Total setelah diskon : Rp."<<akhir<<endl;
+
+}
