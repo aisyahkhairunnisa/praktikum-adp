@@ -1,9 +1,11 @@
+C++
+
 #include <iostream>
 using namespace std;
 
 int main (){
-    string medan, padang, aceh, palembang, jambi, lampung, tujuan, kelas, ekonomi, bisnis, first;
-    int tiket, harga_tambahan, harga;
+    string nama_kota;
+    int tiket, harga_tambahan, harga, tujuan, kelas;
     float diskon, akhir, total;
     cout<<" Haloo! nama saya Aisyah Khairunnisa Ramadhani dengan No BP 2310432030 "<<endl;
     cout<<" ## program pembelian tiket bus ## "<<endl;
@@ -18,62 +20,74 @@ int main (){
     cout<< " 5. Jambi     = Rp.100.000"<<endl;
     cout<< " 6. Lampung   = Rp.275.000"<<endl;
     cout<<endl;
-    cout<< " Tujuan yang dipilih : ";cin>>tujuan;
-    if(tujuan==medan){
+    cout<< " Tujuan yang dipilih (cukup masukkan nomor kota tujuan) : ";cin>>tujuan;
+    cout<<endl;
+    if(tujuan==1){
+        nama_kota="Medan ";
         harga=200000;
-        cout<<" Tujuan yang dipilih adalah Medan";
-    }else if(tujuan==padang){
+        cout<<" Tujuan yang dipilih adalah Medan dengan harga tiket Rp.200.000 "<<endl;
+    }else if(tujuan==2){
+        nama_kota="Padang ";
         harga=150000;
-        cout<<"Tujuan yang dipilih adalah Padang";
-    }else if(tujuan==aceh){
+        cout<<" Tujuan yang dipilih adalah Padang dengan harga tiket Rp.150.000 "<<endl;
+    }else if(tujuan==3){
+        nama_kota="Aceh ";
         harga=250000;
-        cout<<"Tujuan yang dipilih adalah Aceh";
-    }else if(tujuan==palembang){
+        cout<<" Tujuan yang dipilih adalah Aceh dengan harga tiket Rp.250.000 "<<endl;
+    }else if(tujuan==4){
+        nama_kota="Palembang ";
         harga=175000;
-        cout<<"Tujuan yang dipilih adalah Palembang";
-    }else if(tujuan==jambi){
+        cout<<" Tujuan yang dipilih adalah Palembang dengan harga tiket Rp.175.000 "<<endl;
+    }else if(tujuan==5){
+        nama_kota="Jambi ";
         harga=100000;
-        cout<<"Tujuan yang dipilih adalah Jambi" ;
-    }else if(tujuan==lampung){
+        cout<<" Tujuan yang dipilih adalah Jambi dengan harga tiket Rp.100.000 "<<endl;
+    }else if(tujuan==6){
+        nama_kota="Lampung ";
         harga=275000;
-        cout<<"Tujuan yang dipilih adalah Lampung";
+        cout<<" Tujuan yang dipilih adalah Lampung dengan harga tiket Rp.275.000 "<<endl;
     }else{
         harga=0;
+        cout<<" Tujuan tidak ada"<<endl;
     }
-    cout<<endl;
-    cout<<tujuan<<" dengan harga tiket = Rp."<<harga<<endl;
     cout<<endl;
     cout<< " Kelas (biaya tambahan)"<<endl;
     cout<< " 1. Ekonomi Class   = Rp.10.000"<<endl;
     cout<< " 2. Bisnis Class    = Rp.25.000"<<endl;
     cout<< " 3. First Class     = Rp.30.000"<<endl;
     cout<<endl;
-    cout<< " Kelas yang dipilih (cukup tuliskan kata awalnya saja) : "; cin>>kelas;
-    if(kelas==ekonomi){
+    cout<< " Kelas yang dipilih (cukup masukkan nomor kelas saja) : "; cin>>kelas;
+    if(kelas==1){
         harga_tambahan=10000;
+        cout<< " Kelas yang dipilih : Ekonomi Class "<<endl;
     }
-    else if(kelas==bisnis){
+    else if(kelas==2){
         harga_tambahan=25000;
+        cout<<" Kelas yang dipilih : Bisnis Class "<<endl;
     }
-    else if(kelas==first){
+    else if(kelas==3){
         harga_tambahan=30000;
+        cout<<" Kelas yang dipilih : First Class"<<endl;
     }
     else{
         harga_tambahan=0;
+        cout<<" Kelas yang dipilih : tidak ada "<<endl;
     }
-    cout<< " Dengan tambahan biaya                                  :Rp."<<harga_tambahan<<endl;
-    cout<< " jumlah tiket                                           : "; cin>>tiket;
+    cout<<endl;
+    cout<< " Dengan tambahan biaya          :Rp."<<harga_tambahan<<endl;
+    cout<< " Jumlah tiket                   : "; cin>>tiket;
     cout<<endl;
     total= (harga + harga_tambahan)*tiket;
-    if ((tiket >=3)&&(tiket <=5)){
+    if (tiket >=3){
         diskon= total*0.05;
-    }
-    else {
+    }else if (tiket>5){
         diskon= total*0.1;
+    }else {
+        diskon=0;
     }
     akhir=total-diskon;
     cout<<endl;
-    cout<< " Tujuan               : "<<tujuan<<endl;
+    cout<< " Tujuan               : "<<nama_kota<<endl;
     cout<< " Kelas                : "<<kelas<<endl;
     cout<< " Jumlah Tiket         : "<<tiket<<endl;
     cout<< " Total                : Rp."<<total<<endl;
@@ -81,3 +95,78 @@ int main (){
     cout<< " Total setelah diskon : Rp."<<akhir<<endl;
 
 }
+
+Phyton
+
+print(' Haloo! nama saya Aisyah Khairunnisa Ramadhani dengan No BP 2310432030 ')
+print(' ## program pembelian tiket bus ## ')
+print('======================================================================\n')
+print(' Bus PT ANS lintas Sumatera ')
+print(' tujuan ')
+print(' 1. Medan     = Rp.200.000 ')
+print(' 2. Padang    = Rp.150.000 ')
+print(' 3. Aceh      = Rp.250.000 ')
+print(' 4. Palembang = Rp.175.000 ')
+print(' 5. Jambi     = Rp.100.000 ')
+print(' 6. Lampung   = Rp.275.000\n')
+tujuan=int(input('Tujuan yang dipilih (cukup masukkan nomor kota tujuan) :'))
+if tujuan==1:
+    nama_kota='Medan '
+    harga=200000
+    print('Tujuan yang dipilih adalah Medan dengan harga tiket Rp.200.000\n')
+elif tujuan==2:
+    nama_kota='Padang '
+    harga=150000
+    print('Tujuan yang dipilih adalah Padang dengan harga tiket Rp.150.000\n')
+elif tujuan==3:
+    nama_kota='Aceh '
+    harga=250000
+    print('Tujuan yang dipilih adalah Aceh dengan harga tiket Rp.250.000\n')
+elif tujuan==4:
+    nama_kota='Palembang '
+    harga=175000
+    print('Tujuan yang dipilih adalah Palembang dengan harga tiket Rp.175.000\n')
+elif tujuan==5:
+    nama_kota='Jambi '
+    harga=100000
+    print('Tujuan yang dipilih adalah Jambi dengan harga tiket Rp.100.000\n')
+elif tujuan==6:
+    nama_kota='Lampung '
+    harga=275000
+    print('Tujuan yang dipilih adalah Lampung dengan harga tiket Rp.275.000\n')
+else :
+    harga=0
+    print('Tujuan tidak ada\n')
+print(' Kelas (biaya tambahan) ')
+print(' 1. Ekonomi Class   = Rp.10.000 ')
+print(' 2. Bisnis Class    = Rp.25.000 ')
+print(' 3. First Class     = Rp.30.000\n ')
+kelas=int(input('Kelas yang dipilih (cukup masukkan nomor kelas saja) :'))
+if kelas==1:
+    harga_tambahan=10000
+    print('Kelas yang dipilih : Ekonomi Class ')
+elif kelas==2:
+    harga_tambahan=25000
+    print('Kelas yang dipilih : Bisnis Class ')
+elif kelas==3:
+    harga_tambahan=30000
+    print('Kelas yang dipilih : First Class ')
+else :
+    harga_tambahan=0
+    print(' Kelas yang dipilih : tidak ada  ')
+print('Dengan tambahan biaya          :Rp.',harga_tambahan)
+tiket=int(input('Jumlah tiket                   :'))
+total= (harga + harga_tambahan)*tiket
+if tiket >=3:
+    diskon= total*0.05
+elif tiket>5:
+    diskon= total*0.1
+else :
+    diskon=0
+akhir=total-diskon
+print('\n Tujuan                : ',nama_kota)
+print(' Kelas                 : ',kelas)
+print(' Jumlah tiket          : ',tiket)
+print(' Total                 :Rp.',total)
+print(' Diskon                :Rp.',diskon)
+print(' Total setelah diskon  :Rp.',akhir)
