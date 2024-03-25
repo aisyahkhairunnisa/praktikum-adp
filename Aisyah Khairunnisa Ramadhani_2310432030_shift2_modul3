@@ -1,0 +1,34 @@
+#include<iostream>
+using namespace std;
+
+int main (){
+    int f1, f2, n, fn, jumlah;
+    cout<<" Nama    : Aisyah Khairunnisa Ramadhani "<<endl;
+    cout<<" No BP   : 2310432030"<<endl;
+    cout<<" ## Program Bilangan Fibonacci ## "<<endl;
+    cout<<"=========================================="<<endl;
+    cout<<endl;
+    cout<<" Masukkan nilai n (bilangan asli dari 3 sampai 199 yang bukan diantara 100 sampai 109) : "; cin>>n;
+    cout<<endl;
+    f1=1;
+    f2=1;
+    fn=0;
+    cout<<f1<<", ";
+    cout<<f2<<", ";
+    jumlah = 2;
+    for(int i = 2; i<n; i++){
+        if(((3<=n) & (n<=199)) & (n<=100 | n>=109)){
+        fn=f2+f1;
+        f2=f1;
+        f1=fn;
+        cout<<fn<<", ";
+        jumlah=jumlah+fn;
+        }
+        else {
+            cout<<" Masukkan nilai n (bilangan asli dari 3 sampai 199 yang bukan diantara 100 sampai 109) : "; cin>>n;
+        }
+    }
+    cout<<endl;
+    cout<<endl<<" Bilangan fibonacci ke-"<<n<<" adalah "<<fn<<endl;
+  cout<<" Jumlah bilangan fibonacci sampai bilangan ke-"<<n<< " adalah " <<jumlah;
+}
