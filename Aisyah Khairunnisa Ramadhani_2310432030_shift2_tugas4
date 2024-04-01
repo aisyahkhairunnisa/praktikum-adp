@@ -1,0 +1,37 @@
+#include<iostream>
+using namespace std;
+
+int main (){
+    string teks1, teks2, teks3, huruf_vokal;
+    int x, y;
+    cout<< " Nama   : Aisyah Khairunnisa Ramadhani "<<endl;
+    cout<< " No BP  : 2310432030 "<<endl;
+    cout<< "## program mengubah huruf vokal pada lirik lagu ##"<<endl;
+    cout<< "==================================================="<<endl;
+    cout<< " Masukkan lirik lagu (3 kalimat) : "<<endl;
+    cout<< " 1."; getline(cin,teks1);
+    cout<< " 2."; getline(cin,teks2);
+    cout<< " 3."; getline(cin,teks3);
+    cout<<endl;
+    huruf_vokal="aiueoAIUEO";
+    for(x=0;x<teks1.length();x++){
+        for(y=0;y<10;y++){
+            if (teks1[x]==huruf_vokal[y]){teks1[x]='i';}
+        }
+    }
+    for(x=0;x<teks2.length();x++){
+        for(y=0;y<10;y++){
+            if (teks2[x]==huruf_vokal[y]){teks2[x]='i';}
+        }
+    }
+    for(x=0;x<teks3.length();x++){
+        for(y=0;y<10;y++){
+            if (teks3[x]==huruf_vokal[y]){teks3[x]='i';}
+        }
+    }
+    cout<< " Semua huruf vokal dalam lirik diganti menjadi huruf 'i' :"<<endl;
+    cout<< " 1."<<teks1<<endl;
+    cout<< " 2."<<teks2<<endl;
+    cout<< " 3."<<teks3<<endl;
+    }
+
