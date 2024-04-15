@@ -1,0 +1,87 @@
+C++
+
+#include<iostream>
+#include<cmath>
+#include<stdio.h>
+using namespace std;
+
+int main (){
+    int n,i;
+    float x,f,g,h;
+    char ulang='Y';
+    cout<<" Nama  : Aisyah Khairunnisa Ramadhani "<<endl;
+    cout<<" No BP : 2310432030 "<<endl;
+    cout<<" ## PROGRAM FUNGSI ## "<<endl;
+    cout<<"======================================="<<endl;
+    while (ulang=='Y'||ulang=='y'){
+    cout<<"       TABEL FUNGSI        "<<endl;
+    cout<<endl;
+    cout<<" f(x)= 3x^2+7x-2, jika x>=0 "<<endl;
+    cout<<"     = 2x^2-5x-4, jika x<0 "<<endl;
+    cout<<endl;
+    cout<<" g(x)=(f(x))^2-sqrt(f(x)) "<<endl;
+    cout<<endl;
+    cout<<" h(x)= f(x)*g(x) "<<endl;
+    cout<<endl;
+    cout<<" Input banyak data n = "; cin>>n;
+    float x[n], f[n], g[n], h[n];
+    for(i=1;i<=n;i++){
+        cout<<" input nilai x ke-"<<i<<" = ";
+        cin>>x[i];
+        if(x[i]>=0){
+            f[i]=3*(x[i]*x[i])+7*x[i]-2;
+        }else{
+            f[i]=2*(x[i]*x[i])-5*x[i]-4;
+        }
+        g[i]=f[i]*f[i]-sqrt(f[i]);
+        h[i]=f[i]*g[i];
+        }
+    cout<<"  Hasil : "<<endl;
+    cout<<"  ---------------------------------------------------------------------- "<<endl;
+    printf(" | No |    x    |     f(x)    |      g(x)      |          h(x)          |\n");
+    cout<<"  ---------------------------------------------------------------------- "<<endl;
+    for (i=1;i<=n;i++){
+        printf(" | %2d | %7.2f | %11.2f | %14.2f | %22.2f |\n",
+               (i),x[i],f[i],g[i],h[i]);
+    }
+    cout<<"  ---------------------------------------------------------------------- "<<endl;
+    cout<<" Input nilai x lagi ? [Y/N] ";cin>>ulang;
+    }}
+
+Phyton
+
+print("Nama   : Aisyah Khairunnisa Ramadhani")
+print("No BP  : 2310432030")
+print("PROGRAM FUNGSI")
+print("=======================================")
+
+ulang = 'Y'
+while ulang == 'Y' or ulang == 'y':
+    print("TABEL FUNGSI")
+    print("f(x) = 3x² + 7x - 2, jika x > 0")
+    print("     = 2x² - 5x - 4, jika x < 0")
+    print("g(x) = (f(x))² - √f(x)")
+    print("h(x) = f(x) * g(x)")
+
+    n = int(input("\ninput banyak data n = "))
+    x=[]
+    f=[]
+    g=[]
+    h=[]
+    for i in range(n):
+        x =x + [float(input(f"Input nilai x ke-{i+1} = "))]
+        if x[i]>= 0:
+           f=f + [3 * x[i]**2 + 7 * x[i] - 2]
+        else:
+            f=f + [2 * x[i]**2 - 5 * x[i]- 4]
+        g=g + [f[i]**2 - (f[i]**0.5)]
+        h=h+ [f[i] * g[i]]
+
+    print(" Hasil : ")
+    print(" ---------------------------------------------------------------------------")
+    print("| No |      x      |       f(x)      |       g(x)       |         h(x)      |")
+    print(" ---------------------------------------------------------------------------")
+    for i in range(n):
+        print(f"| {i+1:2d} | {x[i]:11.2f} | {f[i]:15.2f} | {g[i]:16.2f} | {h[i]:17.2f} |")
+    print(" ---------------------------------------------------------------------------")
+    ulang = input("Input nilai x lagi? [Y/N] ")
