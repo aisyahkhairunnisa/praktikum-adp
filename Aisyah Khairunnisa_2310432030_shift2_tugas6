@@ -1,0 +1,66 @@
+print('PROGRAM PENGELOLAAN NILAI UJIAN MAHASISWA')
+print('Nama   : Aisyah Khairunnisa Ramadhani')
+print('No. BP : 2310432030')
+print()
+n=['Aisyah', 'Iffah', 'Maura']
+m=['kalkulus2', 'ADP', 'Geonal', 'Matdis', 'ALE']
+nilai=[
+    [86, 90, 85, 93, 95],
+    [95, 80, 75, 87, 82],
+    [75, 85, 95, 76, 87]
+]
+#output 1
+print('='*(30+12*len(m)))
+print(f'| {'Nama Mahasiswa' :<16} |', end=' ')
+for k in m :
+    print(f'{k:<12}|', end=' ')
+print()
+print('='*(30+12*len(m)))
+
+for i in range (len(n)) :
+    print(f'| {n[i]:<16} |', end=' ')
+    for j in range (len(m)) :
+        print(f'{nilai[i][j]:<12}|', end=' ')
+    print()
+print('='*(30+12*len(m)))
+
+#output 2
+print()
+print('='*(33))
+print(f'| {'Nama Mahasiswa':<16} | {'Rata-Rata':<10} |', end=' ')
+print()
+print('='*(33))
+
+for i in range (len(n)) :
+    jumlah=sum(nilai[i])
+    rata_rata=jumlah/(len(m))
+    print(f'|{n[i]:<17} | {rata_rata:<10} |\n', end='')
+print('='*(33))
+print()
+
+#output 3
+for i in range (len(m)) :
+    matkul=m[i]
+    nilai_matkul=[nilai[j][i] for j in range (len(n)) ]
+    nilai_terendah = nilai_matkul[0]
+    nilai_terendah_mhs= [n[0]]  
+    nilai_tertinggi = nilai_matkul[0]
+    nilai_tertinggi_mhs= [n[0]]  
+    for j in range(1, len(nilai_matkul)):    
+        if nilai_matkul[j] < nilai_terendah:
+            nilai_terendah= nilai_matkul[j]
+            nilai_terendah_mhs = [n[j]]
+        elif nilai_matkul[j] == nilai_terendah :
+            nilai_terendah_mhs.append(n[j])
+
+        if nilai_matkul[j] > nilai_tertinggi:
+            nilai_tertinggi = nilai_matkul[j]
+            nilai_tertinggi_mhs = [n[j]]
+        elif nilai_matkul[j] == nilai_tertinggi :
+            nilai_tertinggi_mhs.append(n[j])
+
+    for nama in nilai_terendah_mhs :
+         print(f'Nilai terendah pada mata kuliah {matkul} adalah {nilai_terendah} yang didapatkan oleh {nama} ')
+    for nama in nilai_tertinggi_mhs :
+        print(f'Nilai tertinggi pada mata kuliah {matkul} adalah {nilai_tertinggi} yang didapat oleh {nama}')
+    print()
