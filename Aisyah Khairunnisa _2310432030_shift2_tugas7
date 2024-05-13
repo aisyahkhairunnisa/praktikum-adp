@@ -1,0 +1,68 @@
+print('Nama  : Aisyah Khairunnisa Ramadhani')
+print('No BP : 2310432030')
+print('PROGRAM KONVERSI SUHU')
+print('==================================================================')
+def konversi_suhu(suhu, satuan):
+    if satuan == 'C' :
+        if suhu>= 0 and suhu<= 100 : 
+            R = (4/5)*suhu
+            F = ((9/5)*suhu)+32
+            K = suhu+273.15
+            print('-----------------------------------------------------------------------------')
+            print (f'({suhu}) derajat Celcius sama dengan ({R:.3f}) derajat Reamur')
+            print('-----------------------------------------------------------------------------')
+            print (f'({suhu}) derajat Celcius sama dengan ({F:.3f}) derajat Fahrenheit')
+            print('-----------------------------------------------------------------------------')
+            print (f'({suhu}) derajat Celcius sama dengan ({K:.3f}) Kelvin')
+            print('-----------------------------------------------------------------------------')
+        else :
+            print ('Suhu yang anda inputkan tidak sesuai')
+    elif satuan == 'R' :
+        if suhu>= 0 and suhu<= 80 :
+            C = (5/4)*suhu
+            F = ((9/4)*suhu)+32
+            K = ((5/4)*suhu)+273.15
+            print('-----------------------------------------------------------------------------')
+            print (f'({suhu}) derajat Reamur sama dengan ({C:.3f}) derajat Celcius')
+            print('-----------------------------------------------------------------------------')
+            print (f'({suhu}) derajat Reamur sama dengan ({F:.3f}) derajat Fahrenheit')
+            print('-----------------------------------------------------------------------------')
+            print (f'({suhu}) derajat Reamur sama dengan ({K:.3f}) Kelvin')
+            print('-----------------------------------------------------------------------------')
+        else :
+            print ('Suhu yang anda inputkan tidak sesuai')
+    elif satuan == 'F' :
+        if suhu>= 32 and suhu<=212 :
+            C = (5/9)*(suhu-32)
+            R = (4/9)*(suhu-32)
+            K = (5/9)*(suhu+459.67)
+            print('-----------------------------------------------------------------------------')
+            print (f'({suhu}) derajat Fahrenheit sama dengan ({C:.3f}) derajat Celcius')
+            print('-----------------------------------------------------------------------------')
+            print (f'({suhu}) derajat Fahrenheit sama dengan ({R:.3f}) derajat Reamur')
+            print('-----------------------------------------------------------------------------')
+            print (f'({suhu}) derajat Fahrenheit sama dengan ({K:.3f}) Kelvin')
+            print('-----------------------------------------------------------------------------')
+        else :
+            print ('Suhu yang anda inputkan tidak sesuai')
+    elif satuan == 'K' :
+        if suhu>= 273.15 and suhu<= 373.15 :
+            C = suhu-273.15
+            R = (4/5)*(suhu-273.15)
+            F = ((9/5)*suhu)-459.67
+            print('-----------------------------------------------------------------------------')
+            print (f'({suhu}) Kelvin sama dengan ({C:.3f}) derajat Celcius')
+            print('-----------------------------------------------------------------------------')
+            print (f'({suhu}) Kelvin sama dengan ({R:.3f}) derajat Reamur')
+            print('-----------------------------------------------------------------------------')
+            print (f'({suhu}) Kelvin sama dengan ({F:.3f}) derajat Fahrenheit')
+            print('-----------------------------------------------------------------------------')
+        else :
+            print ('Suhu yang anda inputkan tidak sesuai')
+    else :
+            print ('Suhu yang anda inputkan tidak sesuai')
+suhu = int(input('Masukkan suhu dalam drajat : '))
+satuan = input ('Masukkan satuan suhu (C/R/F/K) : ' )
+print()
+hasil = konversi_suhu(suhu, satuan)
+print (hasil)
