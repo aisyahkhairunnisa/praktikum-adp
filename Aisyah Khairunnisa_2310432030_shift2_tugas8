@@ -1,0 +1,59 @@
+print('Nama  : Aisyah Khairunnisa Ramadhani')
+print('No BP : 2310432030')
+print('Program daftar buku yang akan dibaca')
+print('==========================================')
+def menyimpan(judul,penulis,penerbit,tahun) :
+	with open ('daftar_buku.txt','a') as f :
+		f.write(f'{judul}-{penulis}-{penerbit}-{tahun}\n')
+	print(f'Buku {judul} telah ditambahkan ke dalam daftar bacaan')
+	
+def menghapus(judul) :
+	with open ('daftar_buku.txt','r') as f :
+		lines=f.readlines()
+	with open ('daftar_buku.txt','w') as f :
+		hapus=False
+		for i in lines :
+			if i.split('-')[0]!= judul :
+				f.write(i)
+			else :
+				hapus=True
+		if hapus :
+			print(f' Buku {judul} telah dihapus dari daftar bacaan')
+		else :
+			print(f' Buku berjudul {judul} tidak ditemukan dalam daftar bacaan')
+			
+def menampilkan():
+	with open ('daftar_buku.txt','r') as f :
+		lines=f.readlines()
+		if not lines :
+			print('Tidak ada daftar bacaan')
+		else :
+			for i in lines :
+				print(i.strip())
+				
+def main(file):
+	while True: 
+		print ('Pilihan menu yang akan digunakan')
+		print('1.Menyimpan Data Buku')
+		print('2.Menghapus Data Buku')
+		print('3.Menampilkan Data buku')
+		print('4.Selesai Melihat Daftar Buku')
+		pilihan=input(' Masukkan nomor pilihan : ')
+		if pilihan=='1' :
+			judul=input(' Judul buku  : ')
+			penulis=input(' Nama penulis : ')
+			penerbit=input(' Nama penerbit : ')
+			tahun=input(' Tahun terbit : ')
+			menyimpan(judul,penulis,penerbit,tahun)
+		elif pilihan=='2' :
+			judul=input(' Judul buku : ')
+			menghapus(judul)
+		elif pilihan=='3' :
+			menampilkan()
+		elif pilihan=='4' :
+			print ('keluar dari program, Selamat membaca.')
+			break
+		else :
+			print ('Pilihan tidak valid. Ulang masukkan Pilihan.')
+file='daftar_buku.txt'
+main(file)
