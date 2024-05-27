@@ -1,0 +1,43 @@
+import os
+import time
+from termcolor import colored, cprint
+
+os.system('cls')
+print('Nama     : Aisyah Khairunnisa Ramadhani')
+print('No. BP   : 2310432030 ')
+print('Program Pembuatan Logo Visa')
+print('================================================')
+print()
+def visa():
+    logo = [
+        "VVVVVVVV          VVVV  IIII   SSSSSSSSSSS        AAAAAA        ",
+        "    VVVVV        VVVV   IIII  SSS        SS      AAA  AAA       ",
+        "       VVVV     VVVV    IIII  SSS               AAA    AAA      ",
+        "        VVVV   VVVV     IIII   SSSSSSSSSSS     AAA      AAA     ",
+        "         VVVV VVVV      IIII            SSS   AAAAAAAAAAAAAA    ",
+        "          VVVVVVV       IIII  SSS       SSS  AAA          AAA   ",
+        "           VVVVV        IIII   SSSSSSSSSSS  AAA            AAA  "    
+    ]
+    for line in logo :
+        posisi_logo = line.center(70)
+        for char in posisi_logo:
+            if char != ' ':
+                cprint(" ", "blue", "on_blue", end="")
+            else:
+                cprint(" ", "blue", "on_white", end="")
+        print()
+for i in range(13):
+        if (i>9) :
+            time.sleep(1)
+            cprint(" "*70, "yellow", "on_yellow")
+        elif (i<3) :
+            time.sleep(1)
+            cprint(" "*70, "blue","on_blue")
+        else :
+            time.sleep(1)
+            if i == 6 :
+                visa()
+            else :
+                cprint(" "*70, "blue", "on_white")
+print()
+print("Terima kasih sudah menggunakan program ini, have a nice day !")
