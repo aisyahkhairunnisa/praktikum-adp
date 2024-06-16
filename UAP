@@ -3,18 +3,18 @@ import matplotlib.pyplot as plt
 from termcolor import colored, cprint
 
 os.system('cls')
-def menyimpan_harian(nama,umur,tgl,bb,tb,minum,makan,makanan,olahraga,tidur):
-     with open ('data_kesehatan.txt', 'a') as f :
-        f.write(f"{nama}-{umur}")
-        f.write(f"{tgl}-{bb}-{tb}-{minum}-{makan}-{makanan}-{olahraga}-{tidur}\n")
+def menyimpan_harian(nama,umur,tgl,bb,tb,minum,makan,K,P,S,olahraga,tidur):
+    with open ('riwayat_kesehatan.txt', 'a') as f :
+        f.write(f"{nama}-{umur}-{tgl}-{bb}-{tb}-{minum}-{makan}-{K}-{P}-{S}-{olahraga}-{tidur}\n")
+    print(f'data tanggal {tgl} telah ditambahkan ke dalam riwayat kesehatan')
 
 def menghapus_harian(tgl) :
-	with open ('data_kesehatan.txt','r') as f :
+	with open ('riwayat_kesehatan.txt','r') as f :
 		lines=f.readlines()
-	with open ('data_kesehatan.txt','w') as f :
+	with open ('riwayat_kesehatan.txt','w') as f :
 		hapus=False
 		for i in lines :
-			if i.split('-')[0]!= tgl :
+			if i.split('-')[2]!= tgl :
 				f.write(i)
 			else :
 				hapus=True
@@ -24,7 +24,7 @@ def menghapus_harian(tgl) :
 			print(f' Data tanggal {tgl} tidak ditemukan dalam data kesehatan')
 
 def menampilkan():
-	with open ('data_kesehatan.txt','r') as f :
+	with open ('riwayat_kesehatan.txt','r') as f :
 		lines=f.readlines()
 		if not lines :
 			print('Tidak ada data kesehatan')
@@ -33,8 +33,6 @@ def menampilkan():
 				print(i.strip())
 
 def analisis_kesehatan(bb, tb, bmi, jenis_kelamin, umur, olahraga):
-    tinggi_meter = tb / 100
-    bmi = bb / (tinggi_meter ** 2)
     
     if bmi < 18.5:
         kategori_bmi = "Kurus"
@@ -51,14 +49,16 @@ def analisis_kesehatan(bb, tb, bmi, jenis_kelamin, umur, olahraga):
     else:
         bmr = 447.593 + (9.247 * bb) + (3.098 * tb) - (4.330 * umur)
     print("BMR anda adalah ",bmr)
-
-    if olahraga == 0:
+    jumlah =0
+    while olahraga=='ada' :
+            jumlah+=1
+    if jumlah == 0:
         tingkat_aktivitas = "sedentari"
-    elif olahraga <= 8:
+    elif jumlah <= 8:
         tingkat_aktivitas = "ringan"
-    elif olahraga <= 16:
+    elif jumlah <= 16:
         tingkat_aktivitas = "sedang"
-    elif olahraga <= 24:
+    elif jumlah <= 24:
         tingkat_aktivitas = "aktif"
     else:
         tingkat_aktivitas = "sangat aktif"
@@ -71,8 +71,9 @@ def analisis_kesehatan(bb, tb, bmi, jenis_kelamin, umur, olahraga):
             "sangat aktif": 1.9
         }
     kalori=bmr * faktor_aktivitas.get(tingkat_aktivitas.lower(), 1.2)
+    return kalori
     
-def saran_kesehatan(K, P, S, V, bmi, kalori, minum, olahraga, makan, makanan, tidur):
+def saran_kesehatan(K, P, S, bmi, kalori, minum, makan, tidur):
     saran = "Saran Kesehatan:\n"
     if bmi < 18.5:
         saran += "- Makan lebih banyak makanan berkalori tinggi dan seimbang.\n"
@@ -94,7 +95,7 @@ def saran_kesehatan(K, P, S, V, bmi, kalori, minum, olahraga, makan, makanan, ti
         saran += "- Pola makan anda sudah baik, pertahankan kebiasaan anda\n"
     elif makan > 3 :
         saran += "- Asupan makanan anda berlebih, kurangi asupan makanan anda agar tida terkena obesitas\n"
-    saran += f"- Dalam sehari disarankan makan 3 kali sehari, yaitu sarapan, makan siang, dan makan malam"
+    saran += "- Dalam sehari disarankan makan 3 kali sehari, yaitu sarapan, makan siang, dan makan malam"
 
     if K == 'ada' :
         if P == 'ada' :
@@ -127,7 +128,7 @@ def saran_kesehatan(K, P, S, V, bmi, kalori, minum, olahraga, makan, makanan, ti
         saran += "- Waktu istirahat anda sudah cukup, pertahankan pola istirahat anda\n"
     else : 
         saran += "- Waktu istirahat anda berlebih, perbanyak aktivitas produktif\n"
-    saran += f"- Anda memerlukan waktu istirahat selama 8 jam dalam sehari\n"
+    saran += "- Anda memerlukan waktu istirahat selama 8 jam dalam sehari\n"
     return saran
 
 def tampilkan_grafik(data):
@@ -139,42 +140,49 @@ def tampilkan_grafik(data):
     plt.ylabel('Nilai')
     plt.show()
 
+nama = input("Masukkan nama pengguna : ")
+umur = input("Umur : ")
+jenis_kelamin = input("jenis kelamin (pria/wanita) : ")
+bb=float(input("Berat badan (dalam kg) : "))
+tb=float(input("Tinggi badan (dalam cm) : "))
 def menu(file):
     while True :
-        nama = input("Masukkan nama pengguna : ")
-        umur = input("Umur : ")
-        jenis_kelamin = input("jenis kelamin (pria/wanita) : ")
         print("1. Menambah data harian")
         print("2. Menghapus data harian")
         print("3. Tampilkan riwayat data kesehatan ")
         print("4. Tampilkan analisis kesehatan")
         print("5. Saran Kesehatan")
         print("6. Tampilkan Grafik Kesehatan keseluruhan")
+        print("7. Keluar dari aplikasi")
         pilihan=input("Masukkan nomor menu yang anda inginkan : ")
         if pilihan == '1' :
-            tgl = input("Masukkan tanggal hari ini dengan format dd/mm/yyyy")
-            bb=float(input("Berat badan (dalam kg) : "))
-            tb=float(input("Tinggi badan (dalam cm) : "))
-            minum = int(input("Berapa gelas anda minum hari ini ? (masukkan dalam angka banyak gelas)"))
-            makan = int(input("Berapa Kali anda makan hari ini ? (masukkan dalam angka)"))
+            tgl = input("Masukkan tanggal hari ini dengan format dd/mm/yyyy : ")
+            minum = int(input("Berapa gelas anda minum hari ini ? (masukkan dalam angka banyak gelas) "))
+            makan = int(input("Berapa Kali anda makan hari ini ? (masukkan dalam angka) "))
             print("Apa saja menu makanan anda hari ini " )
             K = input("Apakah ada karbohidrat ? (Jawab ada/tidak) ")
             P = input("Apakah ada Protein ? (Jawab ada/tidak) ")
-            S = input("Apakah ada serat ? (Jawab ada/tidak)")
+            S = input("Apakah ada serat ? (Jawab ada/tidak) ")
             olahraga = input("Apakah hari ini anda berolahraga ? ")
             tidur = input("Bearapa lama waktu tidur anda kemarin ? (dalam jam) ")
-            menyimpan_harian(nama,umur,tgl,bb,tb,minum,makan,makanan,olahraga,tidur)
+            menyimpan_harian(nama,umur,tgl,bb,tb,minum,makan,K,P,S,olahraga,tidur)
         elif pilihan == '2' :
             tgl = input ("Masukkan tanggal, data yang ingin dihapus : ")
             menghapus_harian(tgl)
         elif pilihan == '3' :
             menampilkan()
         elif pilihan == '4' :
-            bulan = input("Masukkkan nama bulan yang ingin ditampilkan analisis kesehatannya : ")
-            analisis_kesehatan()
+            bmi = bb /(tb / 100)
+            analisis_kesehatan(bb, tb, bmi, jenis_kelamin, umur, olahraga)
         elif pilihan == '5' :
-            saran_kesehatan(bmi, kalori, minum, olahraga, makan, makanan, tidur)
+            kalori=analisis_kesehatan(bb, tb, bmi, jenis_kelamin, umur, olahraga)
+            saran_kesehatan(K, P, S, bmi, kalori, minum, makan, tidur)
         elif pilihan == '6' :
-            tampilkan_grafik(data)
-file='data_kesehatan.txt'
+            tampilkan_grafik()
+        elif pilihan == '7' :
+            print("Keluar dari aplikasi.")
+            break
+        else :
+            print ('Pilihan tidak valid. Ulang masukkan Pilihan.')
+file='riwayat_kesehatan.txt'
 menu(file)
