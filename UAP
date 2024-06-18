@@ -5,7 +5,7 @@ from termcolor import colored, cprint
 os.system('cls')
 
 daftar_akun = "akun.txt"
-def buat_akun(username, password):
+def buat_akun(username, password,bb,tb,jenis_kelamin,umur):
     if not os.path.isfile(daftar_akun):
         with open(daftar_akun, 'w') as file:
             file.write("Username,Password,bb,tb,gender,umur\n")
@@ -13,12 +13,6 @@ def buat_akun(username, password):
     if username_sama(username):
         print("Username sudah digunakan. Silakan pilih username lain.")
         return False
-    
-    print("Masukkan data awal registrasi anda")
-    jenis_kelamin = input("Masukkan jenis kelamin (pria/wanita): ")
-    umur = int(input("Masukkan usia: "))
-    bb = float(input("Masukkan berat badan (kg): "))
-    tb = float(input("Masukkan tinggi badan (cm): "))
 
     with open(daftar_akun, 'a') as file:
         file.write(f"{username},{password},{bb},{tb},{jenis_kelamin},{umur}\n")
@@ -36,7 +30,7 @@ def username_sama(username):
                     return True
     return False
 
-def login(username, password):
+def login(username, password, bb, tb, jenis_kelamin, umur):
     if os.path.isfile(daftar_akun):
         with open(daftar_akun, 'r') as file:
             lines = file.readlines()[1:]
@@ -100,7 +94,7 @@ def menampilkan(username):
     else :
         print("Belum ada data Kesehatan yang dicatat.")
 
-def analisis_kesehatan(username,tb,bb,jenis_kelamin,umur):
+def analisis_kesehatan(username,bb,tb,jenis_kelamin,umur):
     file_data = f"{username}_data_kesehatan.txt"
     if not os.path.isfile(file_data):
         print("Belum ada data kesehatan yang dicatat.")
@@ -146,11 +140,11 @@ def analisis_kesehatan(username,tb,bb,jenis_kelamin,umur):
 
     if rata_rata_olahraga <= 8:
         tingkat_aktivitas = "sedentari"
-    elif rata_rata_olahraga < 30:
+    elif rata_rata_olahraga <= 30:
         tingkat_aktivitas = "ringan"
-    elif rata_rata_olahraga >= 30 and rata_rata_olahraga < 60:
+    elif rata_rata_olahraga > 30 and rata_rata_olahraga <= 60:
         tingkat_aktivitas = "sedang"
-    elif rata_rata_olahraga >= 60 and rata_rata_olahraga <= 90:
+    elif rata_rata_olahraga > 60 and rata_rata_olahraga <= 90:
         tingkat_aktivitas = "aktif"
     else:
         tingkat_aktivitas = "sangat aktif"
@@ -314,12 +308,17 @@ def regis_akun():
         if akun == '1':
             username = input("Masukkan username: ")
             password = input("Masukkan password: ")
-            if login(username, password):
-                menu(username,password,bb,tb,jenis_kelamin,umur)
+            if login(username, password, bb, tb, jenis_kelamin, umur):
+                menu(username, bb, tb, jenis_kelamin, umur)
         elif akun == '2':
             username = input("Masukkan username: ")
             password = input("Masukkan password: ")
-            if buat_akun(username, password):
+            print("Masukkan data awal registrasi anda")
+            jenis_kelamin = input("Masukkan jenis kelamin (pria/wanita): ")
+            umur = int(input("Masukkan usia: "))
+            bb = float(input("Masukkan berat badan (kg): "))
+            tb = float(input("Masukkan tinggi badan (cm): "))
+            if buat_akun(username, password, bb, tb, jenis_kelamin, umur):
                 print("Silakan login dengan akun baru Anda.")
         elif akun == '3' :
             print("Terimakasih telah menggunakan SYARA's Healthy Lifestyle Program, jangan lupa jalankan pola hidup sehat!")
