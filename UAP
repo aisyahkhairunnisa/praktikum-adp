@@ -5,7 +5,7 @@ from termcolor import colored, cprint
 os.system('cls')
 
 daftar_akun = "akun.txt"
-def buat_akun(username, password,bb,tb,jenis_kelamin,umur):
+def buat_akun(username, password):
     if not os.path.isfile(daftar_akun):
         with open(daftar_akun, 'w') as file:
             file.write("Username,Password,bb,tb,gender,umur\n")
@@ -324,7 +324,7 @@ def regis_akun():
         elif akun == '2':
             username = input("Masukkan username: ")
             password = input("Masukkan password: ")
-            if buat_akun(username, password, bb, tb, jenis_kelamin, umur):
+            if buat_akun(username, password):
                 print("Silakan login dengan akun baru Anda.")
         elif akun == '3' :
             print("Terimakasih telah menggunakan SYARA's Healthy Lifestyle Program, jangan lupa jalankan pola hidup sehat!")
