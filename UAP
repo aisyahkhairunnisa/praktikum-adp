@@ -13,6 +13,12 @@ def buat_akun(username, password,bb,tb,jenis_kelamin,umur):
     if username_sama(username):
         print("Username sudah digunakan. Silakan pilih username lain.")
         return False
+    
+    print("Masukkan data awal registrasi anda")
+    jenis_kelamin = input("Masukkan jenis kelamin (pria/wanita): ")
+    umur = int(input("Masukkan usia: "))
+    bb = float(input("Masukkan berat badan (kg): "))
+    tb = float(input("Masukkan tinggi badan (cm): "))
 
     with open(daftar_akun, 'a') as file:
         file.write(f"{username},{password},{bb},{tb},{jenis_kelamin},{umur}\n")
@@ -30,7 +36,7 @@ def username_sama(username):
                     return True
     return False
 
-def login(username, password, bb, tb, jenis_kelamin, umur):
+def login(username, password):
     if os.path.isfile(daftar_akun):
         with open(daftar_akun, 'r') as file:
             lines = file.readlines()[1:]
@@ -85,7 +91,7 @@ def menampilkan(username):
             for line in lines:
                 data.append(line.strip().split(','))
         print("-"*129)
-        print(f"{'Tanggal':<12}|{'Makan':<10}|{'Karbohidrat':<12}|{'Protein':<10}|{'Serat':<8}|{'Minum (gelas)':<15}|{'Lama waktu tidur':<17}|{'Intensitas Olahraga':<20}")
+        print(f"|{'Tanggal':<12}|{'Makan':<10}|{'Karbohidrat':<12}|{'Protein':<10}|{'Serat':<8}|{'Minum (gelas)':<15}|{'Lama waktu tidur':<17}|{'Intensitas Olahraga':<20}|")
         print("-"*129)
         for i in data :
             for item in i :
@@ -112,14 +118,17 @@ def analisis_kesehatan(username,bb,tb,jenis_kelamin,umur):
             Se.append(S)
             minuman.append(int(minum))
             wtidur.append(float(tidur))
-            Lolahraga.append(int(olahraga))
+            Lolahraga.append(float(olahraga))
 
     rata_rata_makan = sum(makanan) / len(makanan) if makanan else 0
     rata_rata_minum = sum(minuman) / len(minuman) if minuman else 0
     rata_rata_tidur = sum(wtidur) / len(wtidur) if wtidur else 0
     rata_rata_olahraga = sum(Lolahraga) / len(Lolahraga) if Lolahraga else 0
 
-    bmi=float(bb/(tb/100))
+    bb=float(bb)
+    tb=float(tb)/100
+    bmi=bb/(tb ** 2)
+
     if bmi < 18.5:
         kategori_bmi = "Kurus"
     elif 18.5 <= bmi < 24.9:
@@ -128,15 +137,14 @@ def analisis_kesehatan(username,bb,tb,jenis_kelamin,umur):
         kategori_bmi = "Overweight"
     else:
         kategori_bmi = "Obesitas"
-    print("Kategori BMI anda adalah", kategori_bmi)
-
+    
+    umur=int(umur)
     if jenis_kelamin.lower() == 'pria':
         bmr = float(88.362 + (13.397 * bb) + (4.799 * tb) - (5.677 * umur))
     elif jenis_kelamin.lower() == 'wanita' :
         bmr =float( 447.593 + (9.247 * bb) + (3.098 * tb) - (4.330 * umur))
     else :
         print("Data tidak valid.")
-    print("BMR anda adalah ",bmr)
 
     if rata_rata_olahraga <= 8:
         tingkat_aktivitas = "sedentari"
@@ -156,64 +164,66 @@ def analisis_kesehatan(username,bb,tb,jenis_kelamin,umur):
             "aktif": 1.725,
             "sangat aktif": 1.9
         }
-    kalori=bmr * faktor_aktivitas.get(tingkat_aktivitas.lower(), 1.2)
     
-    saran = "Saran Kesehatan:\n"
+    print("BMR anda adalah ",bmr)
+    print("Kategori BMI anda adalah", kategori_bmi)
+    kalori=bmr * faktor_aktivitas.get(tingkat_aktivitas.lower(), 1.2)
+    print("Kalori yang anda butuhkan dalam sehari adalah " ,kalori)
+    print()
+    print("Saran Kesehatan:\n")
     if bmi < 18.5:
-        saran += "- Makan lebih banyak makanan berkalori tinggi dan seimbang.\n"
+        print("- Makan lebih banyak makanan berkalori tinggi dan seimbang.\n")
     elif 25 <= bmi < 29.9:
-        saran += "- Kurangi makanan tinggi kalori, perbanyak sayuran dan buah.\n"
+        print("- Kurangi makanan tinggi kalori, perbanyak sayuran dan buah.\n")
     elif bmi >= 30:
-        saran += "- Konsultasi dengan dokter atau ahli gizi untuk diet yang tepat.\n"
-    saran += f"- Anda memerlukan sekitar {kalori:.2f} kalori per hari berdasarkan tingkat aktivitas Anda.\n"
+        print("- Konsultasi dengan dokter atau ahli gizi untuk diet yang tepat.\n")
+    print(f"- Anda memerlukan sekitar {kalori:.2f} kalori per hari berdasarkan tingkat aktivitas Anda.\n")
     
     if rata_rata_minum < 8 :
-        saran += "- Anda harus memperhatikan asupan cairan anda, Asupan cairan harian anda masih kurang\n"
+        print("- Anda harus memperhatikan asupan cairan anda, Asupan cairan harian anda masih kurang\n")
     elif rata_rata_minum >= 8 :
-        saran += "- Asupan cairan anda sudah cukup, pertahankan kebiasaan anda\n"
-    saran += f"- Asupan cairan disarankan 8 gelas air mineral dalam sehari\n"
+        print("- Asupan cairan anda sudah cukup, pertahankan kebiasaan anda\n")
+    print(f"- Asupan cairan disarankan 8 gelas air mineral dalam sehari\n")
 
     if rata_rata_makan < 3 :
-        saran += "- Perbaiki pola makan anda. Anda harus menjaga energi dan keseimbangan nutrisi anda\n"
+        print("- Perbaiki pola makan anda. Anda harus menjaga energi dan keseimbangan nutrisi anda\n")
     elif rata_rata_makan == 3 :
-        saran += "- Pola makan anda sudah baik, pertahankan kebiasaan anda\n"
+        print("- Pola makan anda sudah baik, pertahankan kebiasaan anda\n")
     elif rata_rata_makan > 3 :
-        saran += "- Asupan makanan anda berlebih, kurangi asupan makanan anda untuk mengurangi resiko obesitas\n"
-    saran += "- Dalam sehari disarankan makan 3 kali sehari, yaitu sarapan, makan siang, dan makan malam"
+        print("- Asupan makanan anda berlebih, kurangi asupan makanan anda untuk mengurangi resiko obesitas\n")
+    print( "- Dalam sehari disarankan makan 3 kali sehari, yaitu sarapan, makan siang, dan makan malam")
 
     if K == 'ada' :
         if P == 'ada' :
             if S == 'ada' :
-                saran += "Porsi makan anda sudah bagus. Pertahankan porsi makan lengkap anda"
+                print( "-Porsi makan anda sudah bagus. Pertahankan porsi makan lengkap anda\n")
             else :
-                saran += "Perbaiki nutrisi yang anda konsumsi ! Anda kekurangan serat, serat penting untuk proses metabolisme tubuh." 
+                print( "-Perbaiki nutrisi yang anda konsumsi ! Anda kekurangan serat, serat penting untuk proses metabolisme tubuh.\n")
         else :
             if S == 'ada' :
-                saran += "Perbaiki nutrisi yang anda konsumsi ! Anda kekurangan protein, protein sangat dibutuhkan untuk fungsi biologis"
+                print( "-Perbaiki nutrisi yang anda konsumsi ! Anda kekurangan protein, protein sangat dibutuhkan untuk fungsi biologis.\n")
             else :
-                saran +="Perbaiki nutrisi yang anda konsumsi ! Anda kekurangan protein dan serat, protein sangat dibutuhkan untuk fungsi biologis dan serat dibutuhkan untuk proses metabolisme anda."
+                print("-Perbaiki nutrisi yang anda konsumsi ! Anda kekurangan protein dan serat, protein sangat dibutuhkan untuk fungsi biologis dan serat dibutuhkan untuk proses metabolisme anda.\n")
     else :
         if P == 'ada' :
             if S == 'ada' :
-                saran =+ "Jangan lupakan karbohidrat ! karbohidrat sangat penting untuk energi anda "
+                print( "-Jangan lupakan karbohidrat ! karbohidrat sangat penting untuk energi anda.\n")
             else :
-               saran =+ "Jangan lupakan karbohidrat dan serat ! karbohidrat sangat penting untuk energi anda dan serat penting untuk proses metabolisme tubuh." 
+               print( "-Jangan lupakan karbohidrat dan serat ! karbohidrat sangat penting untuk energi anda dan serat penting untuk proses metabolisme tubuh.\n" )
         else :
             if S == 'ada' :
-                saran =+ "Jangan lupakan karbohidrat dan protein ! karbohidrat sangat penting untuk energi anda dan protein sangat penting untuk fungsi biologis. "
+                print( "-Jangan lupakan karbohidrat dan protein ! karbohidrat sangat penting untuk energi anda dan protein sangat penting untuk fungsi biologis.\n")
             else :
-                saran =+ "Porsi makan anda sangat tidak baik untuk nutrisi tubuh ! perbaiki nutrisi makan anda dengan mengonsumsi porsi seimbang." 
-    saran += "- Dalam satu porsi makanan harus dilengkapi dengan Karbohidrat, Protein, dan Serat."
+                print( "-Porsi makan anda sangat tidak baik untuk nutrisi tubuh ! perbaiki nutrisi makan anda dengan mengonsumsi porsi seimbang.\n" )
     
 
     if rata_rata_tidur < 8 :
-        saran += "- Anda harus menambah waktu istirahat anda\n"
+        print( "-Anda harus menambah waktu istirahat anda\n")
     elif rata_rata_tidur == 8 :
-        saran += "- Waktu istirahat anda sudah cukup, pertahankan pola istirahat anda\n"
+        print( "-Waktu istirahat anda sudah cukup, pertahankan pola istirahat anda")
     else : 
-        saran += "- Waktu istirahat anda berlebih, perbanyak aktivitas produktif\n"
-    saran += "- Anda memerlukan waktu istirahat selama 8 jam dalam sehari\n"
-    return saran
+        print( "-Waktu istirahat anda berlebih, perbanyak aktivitas produktif")
+    print( "-Anda memerlukan waktu istirahat selama 8 jam dalam sehari\n")
 
 def grafik(username):
     file_data = f"{username}_data_kesehatan.txt"
@@ -233,7 +243,7 @@ def grafik(username):
             Se.append(S)
             minuman.append(int(minum))
             wtidur.append(float(tidur))
-            Lolahraga.append(int(olahraga))
+            Lolahraga.append(float(olahraga))
 
     plt.figure(figsize=(10, 6))
 
@@ -256,9 +266,9 @@ def grafik(username):
 
     plt.figure(figsize=(10, 6))
 
-    plt.bar(tanggal, Ka_bin, width=0.3, align='center', label='Karbohidrat')
-    plt.bar(tanggal, Pr_bin, width=0.3, align='edge', label='Protein')
-    plt.bar(tanggal, Se_bin, width=-0.3, align='edge', label='Serat')
+    plt.bar(tanggal, Ka_bin, width=0.1, align='edge', label='Karbohidrat')
+    plt.bar(tanggal, Pr_bin, width=0.1, align='center', label='Protein')
+    plt.bar(tanggal, Se_bin, width=-0.1, align='edge', label='Serat')
 
     plt.xlabel('Tanggal')
     plt.ylabel('Kehadiran Nutrisi')
@@ -308,16 +318,12 @@ def regis_akun():
         if akun == '1':
             username = input("Masukkan username: ")
             password = input("Masukkan password: ")
-            if login(username, password, bb, tb, jenis_kelamin, umur):
+            login_berhasil, bb, tb, jenis_kelamin,umur=login(username, password)
+            if login_berhasil :
                 menu(username, bb, tb, jenis_kelamin, umur)
         elif akun == '2':
             username = input("Masukkan username: ")
             password = input("Masukkan password: ")
-            print("Masukkan data awal registrasi anda")
-            jenis_kelamin = input("Masukkan jenis kelamin (pria/wanita): ")
-            umur = int(input("Masukkan usia: "))
-            bb = float(input("Masukkan berat badan (kg): "))
-            tb = float(input("Masukkan tinggi badan (cm): "))
             if buat_akun(username, password, bb, tb, jenis_kelamin, umur):
                 print("Silakan login dengan akun baru Anda.")
         elif akun == '3' :
