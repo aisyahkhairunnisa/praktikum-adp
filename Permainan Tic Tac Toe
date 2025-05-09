@@ -1,0 +1,127 @@
+import time
+from termcolor import colored, cprint
+import os 
+os.system('cls')
+
+cprint("Loading.","cyan")
+time.sleep(1)
+os.system('cls')
+cprint("Loading..","cyan")
+time.sleep(1)
+os.system('cls')
+cprint("Loading...","cyan")
+time.sleep(1)
+os.system('cls')
+
+def tampilkan_papan(papan):
+    n = len(papan)
+    print("\nPapan:")
+    print("+-" * (2*n)+"+")
+    for baris in papan:
+        print("| ",end="")
+        print(" | ".join([warna(cell) if cell != " " else " " for cell in baris]),end="")
+        print(" |")
+        print("+-" * (2 * n )+"+")
+
+def warna(simbol):
+    if simbol == 'X' :
+        return colored('X', 'red')
+    elif simbol == 'O' :
+        return colored('O', 'blue')
+    elif simbol == 'S' :
+        return colored('S', 'magenta')
+
+def cek_kemenangan(papan, simbol):
+    n = len(papan)
+    for i in range(n):
+        if all(papan[i][j] == simbol for j in range(n)):
+            return True
+        if all(papan[j][i] == simbol for j in range(n)):
+            return True
+    if all(papan[i][i] == simbol for i in range(n)):
+        return True
+    if all(papan[i][n - 1 - i] == simbol for i in range(n)):
+        return True
+    return False
+
+def papan_penuh(papan):
+    return all(cell != " " for row in papan for cell in row)
+
+def main(n):
+    if n < 4:
+        pemain = ['X', 'O']
+    else:
+        pemain = ['X', 'O', 'S']
+
+    print(f"Jumlah pemain: {len(pemain)}")
+    print("Simbol pemain:", ", ".join([f"Pemain {i+1}: {warna(simbol)}" for i, simbol in enumerate(pemain)]))
+
+    papan = [[" " for _ in range(n)] for _ in range(n)]
+
+    giliran = 0  
+
+    while True:
+        tampilkan_papan(papan)
+        simbol = pemain[giliran]
+        print(f"Giliran Pemain {giliran + 1} ({simbol})")
+
+        while True:
+            try:
+                baris = int(input(f"Masukkan baris (1-{n}): ")) - 1
+                kolom = int(input(f"Masukkan kolom (1-{n}): ")) - 1
+                if 0 <= baris < n and 0 <= kolom < n:
+                    if papan[baris][kolom] == " ":
+                        papan[baris][kolom] = simbol
+                        break
+                    else:
+                        print("Posisi sudah terisi, pilih posisi lain.")
+                else:
+                    print("Posisi di luar batas papan.")
+            except ValueError:
+                print("Masukkan angka bulat yang valid.")
+
+        
+        if cek_kemenangan(papan, simbol):
+            tampilkan_papan(papan)
+            print(f"Pemain {giliran + 1} ({simbol}) MENANG!")
+            break
+
+        if papan_penuh(papan):
+            tampilkan_papan(papan)
+            print("Permainan berakhir SERI.")
+            break
+
+        giliran = (giliran + 1) % len(pemain)
+
+def menu():
+    while True:
+        os.system('cls')
+        try :
+            print("Menu")
+            print("1. Main")
+            print("2. keluar")
+            pilihan=int(input("Pilih Menu : "))
+            os.system('cls')
+            if pilihan == 1 :
+                while True :
+                    try:
+                        n = int(input("Masukkan ukuran papan (minimal 3): "))
+                        if n >= 3:
+                            main(n)
+                            input("Tekan enter untuk kembali ke menu awal")
+                            break
+                        else:
+                            print("Ukuran papan minimal 3x3.")
+                    except ValueError:
+                        print("Masukkan angka bulat yang valid.")
+            elif pilihan == 2 :
+                cprint("Sampai jumpa!","cyan")
+                break
+            else :
+                print("Pilihan menu hanya 1 dan 2")
+                os.system('cls')
+        except ValueError:
+            print("Masukkan angka bulat yang valid.")
+
+if __name__ == "__main__":
+    menu()
