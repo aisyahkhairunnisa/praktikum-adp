@@ -45,7 +45,7 @@ def cek_kemenangan(papan, simbol):
     return False
 
 def papan_penuh(papan):
-    return all(cell != " " for row in papan for cell in row)
+    return all(petak != " " for baris in papan for petak in baris)
 
 def main(n):
     if n < 4:
